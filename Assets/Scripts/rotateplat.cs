@@ -32,10 +32,25 @@ public class rotateplat : MonoBehaviour
             TotalTimer = (int)totaltime;
 
             Timer.GetComponent<Text>().text = "Timer: " + TotalTimer;
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+        if (TotalTimer == 0)
+        {
             transform.rotation = Quaternion.Euler(0, 90, 0);
+            totaltime = 10f;
+            rotated = false;
         }
 
 
 
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.CompareTag("Player") && cointotal == coincount)
+        {
+            Rotatetrig = true;
+            rotated = true;
+        }
     }
 }

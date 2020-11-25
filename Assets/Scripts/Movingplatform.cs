@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Movingplatform : MonoBehaviour
 {
-    float moveSpeed = 5.0f;
+    float moveSpeed = 4.0f;
     float zupperlimit = 37.5f;
     float zlowerlimit = 27.5f;
     bool ismovefwd = false;
