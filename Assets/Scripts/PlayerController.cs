@@ -8,11 +8,15 @@ public class PlayerController : MonoBehaviour
 {
     float maxlimit = 5.0f;
     float movespeed = 5.0f;
-
+    float jumpforce = 5.0f;
     public Rigidbody PlayerRb;
     public Animator playerAnim;
-    
-    
+    public Renderer PlayerRbr;
+    public Renderer PlayerRbr1;
+    public Renderer PlayerRbr2;
+    public Renderer PlayerRbr3;
+    public Material[] playermlr;
+    bool ground = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -79,6 +83,16 @@ public class PlayerController : MonoBehaviour
             SceneManager.LoadScene("Losescene");
         }
 
+        if (Input.GetKeyDown(KeyCode.Space) && ground == false)
+        {
+            PlayerRb.AddForce(Vector3.up * jumpforce, ForceMode.Impulse);
+            playerAnim.SetTrigger("jumptrig");
+            ground = true;
+            PlayerRbr.material.color = playermlr[0].color;
+            PlayerRbr1.material.color = playermlr[0].color;
+            PlayerRbr2.material.color = playermlr[0].color;
+            PlayerRbr3.material.color = playermlr[0].color;
+        }
     }
 
     void StartRun()
@@ -100,5 +114,16 @@ public class PlayerController : MonoBehaviour
         {
             SceneManager.LoadScene("Winscene");
         }
+        if (other.gameObject.CompareTag("ground"))
+        {
+            ground = false;
+            PlayerRbr.material.color = playermlr[1].color;
+            PlayerRbr1.material.color = playermlr[1].color;
+            PlayerRbr2.material.color = playermlr[1].color;
+            PlayerRbr3.material.color = playermlr[1].color;
+
+        }
     }
+
+    
 }
